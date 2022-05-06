@@ -1,12 +1,13 @@
 import {View, Text} from 'react-native';
 import React from 'react';
+import Modal from 'react-native-modal';
 
-const App = () => {
+const Modal = () => {
   return (
     <View>
-      <Text>App</Text>
+      <Text>Modal</Text>
     </View>
   );
 };
 
-export default App;
+export default Modal;
