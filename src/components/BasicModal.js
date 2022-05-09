@@ -3,7 +3,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 
 const BasicModal = ({isVisible, title, onClose}) => {
-  const closeButton = () => {
+  const closeModal = () => {
     return onClose(isVisible);
   };
 
@@ -12,7 +12,7 @@ const BasicModal = ({isVisible, title, onClose}) => {
       <View style={{backgroundColor: '#FFFFFF'}}>
         <Text>{title}</Text>
 
-        <Button onPress={closeButton} title="CLOSE" />
+        <Button onPress={closeModal} title="CLOSE" />
       </View>
     </Modal>
   );

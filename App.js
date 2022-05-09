@@ -5,8 +5,8 @@ import BasicModal from './src/components/BasicModal';
 const App = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
-  const toggleModal = modalVisible => {
-    setModalVisible(!modalVisible);
+  const toggleModal = _isVisible => {
+    setModalVisible(!_isVisible);
   };
 
   return (
