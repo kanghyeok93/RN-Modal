@@ -1,10 +1,39 @@
-import {StyleSheet, View, Text, Button} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 
-const BasicModal = ({isVisible, title, onClose}) => {
+/**
+ * @param {Object} object
+ * @param {boolean} object.isVisible
+ * @param {string} object.title
+ * @param {function} object.onClose
+ * @param {boolean} object.isOneButton
+ */
+
+const BasicModal = ({isVisible, title, onClose, isOneButton}) => {
   const closeModal = () => {
     return onClose(isVisible);
+  };
+
+  const renderButton = () => {
+    if (!isOneButton) {
+      return (
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity onPress={closeModal} style={styles.modalTwoButton}>
+            <Text>CLOSE</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={closeModal} style={styles.modalTwoButton}>
+            <Text>OK</Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity onPress={closeModal} style={styles.modalOneButton}>
+          <Text>CLOSE</Text>
+        </TouchableOpacity>
+      );
+    }
   };
 
   return (
@@ -12,9 +41,7 @@ const BasicModal = ({isVisible, title, onClose}) => {
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
 
-        <View>
-          <Button onPress={closeModal} title="CLOSE" />
-        </View>
+        {renderButton()}
       </View>
     </Modal>
   );
@@ -26,6 +53,20 @@ const styles = StyleSheet.create({
   },
   title: {
     margin: 15,
+  },
+  buttonWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  modalOneButton: {
+    width: '100%',
+    alignItems: 'center',
+    padding: 10,
+  },
+  modalTwoButton: {
+    width: '50%',
+    alignItems: 'center',
+    padding: 10,
   },
 });
 
