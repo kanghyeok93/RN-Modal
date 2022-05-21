@@ -5,39 +5,39 @@ import Modal from 'react-native-modal';
 /**
  * @param {Object} object
  * @param {boolean} object.isVisible
- * @param {string} object.title
- * @param {function} object.onClose
  * @param {boolean} object.isOneButton
+ * @param {string} object.title
+ * @param {function} object.onCancel
  */
 
-const BasicModal = ({isVisible, title, onClose, isOneButton}) => {
-  const closeModal = () => {
-    return onClose(isVisible);
+const BasicModal = ({isVisible, isOneButton, title, onCancel}) => {
+  const cancelModal = () => {
+    return onCancel(isVisible);
   };
 
   const renderButton = () => {
     if (!isOneButton) {
       return (
         <View style={styles.buttonWrapper}>
-          <TouchableOpacity onPress={closeModal} style={styles.modalTwoButton}>
-            <Text>CLOSE</Text>
+          <TouchableOpacity onPress={cancelModal} style={styles.modalTwoButton}>
+            <Text style={styles.modalCancelText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={closeModal} style={styles.modalTwoButton}>
+          <TouchableOpacity onPress={cancelModal} style={styles.modalTwoButton}>
             <Text>OK</Text>
           </TouchableOpacity>
         </View>
       );
     } else {
       return (
-        <TouchableOpacity onPress={closeModal} style={styles.modalOneButton}>
-          <Text>CLOSE</Text>
+        <TouchableOpacity onPress={cancelModal} style={styles.modalOneButton}>
+          <Text>Cancel</Text>
         </TouchableOpacity>
       );
     }
   };
 
   return (
-    <Modal isVisible={isVisible} onBackdropPress={closeModal}>
+    <Modal isVisible={isVisible} onBackdropPress={cancelModal}>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
 
@@ -50,6 +50,7 @@ const BasicModal = ({isVisible, title, onClose, isOneButton}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
+    borderRadius: 15,
   },
   title: {
     margin: 15,
@@ -67,6 +68,9 @@ const styles = StyleSheet.create({
     width: '50%',
     alignItems: 'center',
     padding: 10,
+  },
+  modalCancelText: {
+    color: 'red',
   },
 });
 

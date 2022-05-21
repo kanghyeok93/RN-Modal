@@ -13,9 +13,9 @@ const App = () => {
     <SafeAreaView>
       <BasicModal
         isVisible={modalVisible}
-        title={'I am the modal content!'}
-        onClose={toggleModal}
         isOneButton={false}
+        title={'I am the modal content!'}
+        onCancel={toggleModal}
       />
 
       <Button onPress={() => toggleModal(modalVisible)} title="Modal Click" />
