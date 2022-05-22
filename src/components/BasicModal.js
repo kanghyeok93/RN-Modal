@@ -10,9 +10,15 @@ import Modal from 'react-native-modal';
  * @param {function} object.onCancel
  */
 
-const BasicModal = ({isVisible, isOneButton, title, onCancel}) => {
+const BasicModal = ({isVisible, isOneButton, onCancel, onOK, children}) => {
   const cancelModal = () => {
     return onCancel(isVisible);
+  };
+
+  const okModal = () => {
+    onCancel(isVisible);
+
+    return onOK();
   };
 
   const renderButton = () => {
@@ -22,15 +28,15 @@ const BasicModal = ({isVisible, isOneButton, title, onCancel}) => {
           <TouchableOpacity onPress={cancelModal} style={styles.modalTwoButton}>
             <Text style={styles.modalCancelText}>Cancel</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={cancelModal} style={styles.modalTwoButton}>
+          <TouchableOpacity onPress={okModal} style={styles.modalTwoButton}>
             <Text>OK</Text>
           </TouchableOpacity>
         </View>
       );
     } else {
       return (
-        <TouchableOpacity onPress={cancelModal} style={styles.modalOneButton}>
-          <Text>Cancel</Text>
+        <TouchableOpacity onPress={okModal} style={styles.modalOneButton}>
+          <Text>OK</Text>
         </TouchableOpacity>
       );
     }
@@ -39,7 +45,7 @@ const BasicModal = ({isVisible, isOneButton, title, onCancel}) => {
   return (
     <Modal isVisible={isVisible} onBackdropPress={cancelModal}>
       <View style={styles.container}>
-        <Text style={styles.title}>{title}</Text>
+        {children}
 
         {renderButton()}
       </View>
@@ -51,9 +57,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
-  },
-  title: {
-    margin: 15,
   },
   buttonWrapper: {
     display: 'flex',
