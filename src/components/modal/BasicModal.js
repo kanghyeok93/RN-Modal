@@ -6,8 +6,8 @@ import Modal from 'react-native-modal';
  * @param {Object} object
  * @param {boolean} object.isVisible
  * @param {boolean} object.isOneButton
- * @param {string} object.title
  * @param {function} object.onCancel
+ * @param {function} object.onOK
  */
 
 const BasicModal = ({isVisible, isOneButton, onCancel, onOK, children}) => {
