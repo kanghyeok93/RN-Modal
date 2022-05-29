@@ -6,25 +6,20 @@ import Modal from 'react-native-modal';
  * @param {Object} object
  * @param {boolean} object.isVisible
  * @param {function} object.onCancel
- * @param {function} object.onOK
  */
 
-const BottomModal = ({isVisible, onCancel, onOK, children}) => {
+const BottomModal = ({isVisible, onCancel, children}) => {
   const cancelModal = () => {
     return onCancel(isVisible);
   };
 
-  const okModal = () => {
-    onCancel(isVisible);
-
-    return onOK();
-  };
-
   const renderButton = () => {
     return (
-      <TouchableOpacity onPress={okModal} style={styles.modalButton}>
-        <Text>CLOSE</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonWrapper}>
+        <TouchableOpacity onPress={cancelModal} style={styles.modalButton}>
+          <Text>CLOSE</Text>
+        </TouchableOpacity>
+      </View>
     );
   };
 
@@ -50,6 +45,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFFFFF',
     borderRadius: 15,
+    height: '50%',
+  },
+  buttonWrapper: {
+    alignSelf: 'flex-end',
   },
   modalButton: {
     width: '100%',
