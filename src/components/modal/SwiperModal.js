@@ -10,6 +10,7 @@ import Modal from 'react-native-modal';
  * @param {function} object.onOK
  */
 
+// 스와이퍼 모달 컴포넌트
 const SwiperModal = ({isVisible, isOneButton, onCancel, onOK, children}) => {
   const cancelModal = () => {
     return onCancel(isVisible);

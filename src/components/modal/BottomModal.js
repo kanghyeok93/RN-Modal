@@ -8,6 +8,7 @@ import Modal from 'react-native-modal';
  * @param {function} object.onCancel
  */
 
+// 하단 모달 컴포넌트
 const BottomModal = ({isVisible, onCancel, children}) => {
   const cancelModal = () => {
     return onCancel(isVisible);
