@@ -1,37 +1,44 @@
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
 import Modal from 'react-native-modal';
 
 /**
  * @param {Object} object
  * @param {boolean} object.isVisible
  * @param {function} object.onCancel
+ * @param {Object} object.scrollViewRef
+ * @param {number} object.scrollOffset
  */
 
-const ScrollModal = ({isVisible, onCancel, children}) => {
+// 스크롤 모달 컴포넌트
+const ScrollModal = ({
+  isVisible,
+  onCancel,
+  children,
+  scrollViewRef,
+  scrollOffset,
+}) => {
   const cancelModal = () => {
     return onCancel(isVisible);
   };
 
-  const renderButton = () => {
-    return (
-      <View style={styles.buttonWrapper}>
-        <TouchableOpacity onPress={cancelModal} style={styles.modalButton}>
-          <Text>CLOSE</Text>
-        </TouchableOpacity>
-      </View>
-    );
+  const handleScrollTo = p => {
+    if (scrollViewRef.current) {
+      scrollViewRef.current.scrollTo(p);
+    }
   };
+
   return (
     <Modal
       isVisible={isVisible}
       style={styles.view}
-      onBackdropPress={cancelModal}>
-      <View style={styles.container}>
-        {renderButton()}
-
-        {children}
-      </View>
+      onSwipeComplete={cancelModal}
+      swipeDirection={['down']}
+      scrollTo={handleScrollTo}
+      scrollOffset={scrollOffset}
+      scrollOffsetMax={400 - 300}
+      propagateSwipe={true}>
+      <View style={styles.container}>{children}</View>
     </Modal>
   );
 };
@@ -42,17 +49,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   container: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 15,
-    height: '50%',
-  },
-  buttonWrapper: {
-    alignSelf: 'flex-end',
-  },
-  modalButton: {
-    width: '100%',
-    alignItems: 'center',
-    padding: 10,
+    height: 300,
   },
 });
 
