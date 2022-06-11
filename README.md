@@ -8,7 +8,7 @@ https://github.com/react-native-modal/react-native-modal
 $ npm install --save react-native-modal
 ```
 
-### Modal Components List... ( Implementing )
+### Modal Components List...
 - Basic Modal
 - Bottom Modal
 - Swiper Modal
