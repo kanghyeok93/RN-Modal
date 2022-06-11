@@ -14,9 +14,9 @@ import Modal from 'react-native-modal';
 const ScrollModal = ({
   isVisible,
   onCancel,
-  children,
   scrollViewRef,
   scrollOffset,
+  children,
 }) => {
   const cancelModal = () => {
     return onCancel(isVisible);
@@ -28,6 +28,9 @@ const ScrollModal = ({
     }
   };
 
+  /**
+   * propagateSwipe - 스와이프 이벤트가 하위 구성요소에 전파되도록 허용 유무 (ex ScrollView)
+   *  */
   return (
     <Modal
       isVisible={isVisible}
